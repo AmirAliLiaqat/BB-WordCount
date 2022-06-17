@@ -32,6 +32,7 @@ class BBPlugin {
         add_action( 'wp_enqueue_scripts', array($this, 'enqueue') );
         add_action( 'admin_init', array($this, 'settings') );
         add_action( 'admin_menu', array($this, 'menu_page') );
+        add_filter( 'the_content', array($this, 'ifWrap') );
     }
 
     /******************************* Enqueue all styles and scripts ************************************/
@@ -116,6 +117,48 @@ class BBPlugin {
             </form>
         </div><!--wrap-->
     <?php }
+
+    /******************************* Creating new function for showing Statistics in posts ************************************/
+    function ifWrap($content) {
+        if( is_main_query() AND is_single() AND 
+        (
+            get_option('wc_wordcount', '1') OR 
+            get_option('wc_charactercount', '1') OR 
+            get_option('wc_readtime', '1')
+        ) ) {
+            return $this->create_html($content);
+        }
+        return $content;
+    }
+
+    /******************************* Creating new function for Statistics html ************************************/
+    function create_html($content) {
+        $html = '<h3>' .get_option('wc_headline', 'Post Statistics'). '</h3><p>';
+
+        // get word count once because both wordcount and read time will need it.
+        if(get_option('wc_wordcount', '1') OR get_option('wc_readtime', '1')) {
+            $wordcount = str_word_count(strip_tags($content));
+        }
+
+        if(get_option('wc_wordcount', '1')) {
+            $html .= 'This post has ' . $wordcount . ' words.</br>';
+        }
+
+        if(get_option('wc_charactercount', '1')) {
+            $html .= 'This post has ' . strlen(strip_tags($content)) . ' characters.</br>';
+        }
+
+        if(get_option('wc_readtime', '1')) {
+            $html .= 'This post will take about ' . round($wordcount/255) . ' minute(s) to read.</br>';
+        }
+
+        $html .= '</p>';
+
+        if(get_option('wc_location', '0') == '0') {
+            return $html . $content;
+        }
+        return $content . $html;
+    }
 
 }
 $bbPlugin = new BBPlugin();
