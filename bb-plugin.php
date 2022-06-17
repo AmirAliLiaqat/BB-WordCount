@@ -24,3 +24,10 @@ if(!defined('PLUGIN_URL')) {
 if(!defined('PLUGIN')) {
     define('PLUGIN', plugin_basename( __FILE__ ));
 }
+
+class BBPlugin {
+
+    
+
+}
+$bbPlugin = new BBPlugin();
