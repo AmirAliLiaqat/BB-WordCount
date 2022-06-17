@@ -27,7 +27,16 @@ if(!defined('PLUGIN')) {
 
 class BBPlugin {
 
-    
+    /******************************* Adding all actions and filters ************************************/
+    function __construct() {
+        add_action( 'wp_enqueue_scripts', array($this, 'enqueue') );
+    }
+
+    /******************************* Enqueue all styles and scripts ************************************/
+    function enqueue() {
+        wp_enqueue_style( 'bb-style', PLUGIN_URL . 'assets/css/style.css' );
+        wp_enqueue_script( 'bb-script', PLUGIN_URL . 'assets/js/script.js' );
+    }
 
 }
 $bbPlugin = new BBPlugin();
