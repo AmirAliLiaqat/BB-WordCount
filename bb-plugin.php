@@ -31,6 +31,7 @@ class BBPlugin {
     function __construct() {
         add_action( 'wp_enqueue_scripts', array($this, 'enqueue') );
         add_action( 'admin_init', array($this, 'settings') );
+        add_action( 'admin_menu', array($this, 'menu_page') );
     }
 
     /******************************* Enqueue all styles and scripts ************************************/
@@ -95,6 +96,25 @@ class BBPlugin {
     /******************************* Callback function for wc_readtime field ************************************/
     function readtime_html() { ?>
         <input type="checkbox" name="wc_readtime" value="1" <?php checked(get_option('wc_readtime'), '1'); ?>>
+    <?php }
+
+    /******************************* Adding new options pages ************************************/
+    function menu_page() {
+        add_options_page( 'Word Count Settings', 'Word Count', 'manage_options', 'word_count_settings', array($this, 'menu_page_html') );
+    }
+
+    /******************************* Callback function for menu page ************************************/
+    function menu_page_html() { ?>
+        <div class="wrap">
+            <h1>Word Count Settings</h1>
+            <form action="options.php" method="post">
+                <?php
+                    settings_fields( 'wordCount' );
+                    do_settings_sections( 'word_count_settings' );
+                    submit_button();
+                ?>
+            </form>
+        </div><!--wrap-->
     <?php }
 
 }
