@@ -25,7 +25,7 @@ if(!defined('PLUGIN')) {
     define('PLUGIN', plugin_basename( __FILE__ ));
 }
 
-class BBPlugin {
+class BBWordCount {
 
     /******************************* Adding all actions and filters ************************************/
     function __construct() {
@@ -160,4 +160,4 @@ class BBPlugin {
     }
 
 }
-$bbPlugin = new BBPlugin();
+$bbWordCount = new BBWordCount();
