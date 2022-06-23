@@ -105,8 +105,8 @@ class BBWordCount {
 
     /******************************* Callback function for menu page ************************************/
     function menu_page_html() { ?>
-        <div class="wrap">
-            <h1>Word Count Settings</h1>
+        <h1 style="background: #000; color: #fff; text-align:center; margin:20px; padding:20px;">Word Count Settings</h1>
+        <div class="wrap" style="background:#fff; margin:20px; padding:20px; font-style:italic;">
             <form action="options.php" method="post">
                 <?php
                     settings_fields( 'wordCount' );
