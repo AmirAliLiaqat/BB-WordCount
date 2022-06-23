@@ -1,9 +1,9 @@
 <?php
 /***
  * Plugin Name: BB Word Count
- * Plugin URI: https://www.bytebunch.com/plugins
- * Author: ByteBunch
- * Author URI: https://www.bytebunch.com
+ * Plugin URI: https://amir.bytebunch.com/plugins
+ * Author: Byte Ki Duniya
+ * Author URI: https://amir.bytebunch.com
  * Description: That plugin which is used to count the word and characters of the post. And also tell us the time which is required to read this post.
  * Version: 1.0.0
  * Licence: GPL v2 or Later
